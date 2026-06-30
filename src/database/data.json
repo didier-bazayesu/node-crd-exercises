@@ -16,5 +16,11 @@
     "name": "anemalie",
     "email": "anemalie@gmail.com",
     "address": "KG004"
+  },
+  {
+    "id": 10,
+    "name": "tanasha",
+    "email": "rukundo@gmail.com",
+    "address": "KG002"
   }
 ]
