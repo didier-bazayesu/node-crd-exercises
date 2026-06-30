@@ -1,0 +1,26 @@
+[
+  {
+    "id": 30,
+    "name": "didier",
+    "email": "esiloni@gmail.com",
+    "address": "KG001"
+  },
+  {
+    "id": 2,
+    "name": "tanasha",
+    "email": "rukundo@gmail.com",
+    "address": "KG002"
+  },
+  {
+    "id": 6,
+    "name": "anemalie",
+    "email": "anemalie@gmail.com",
+    "address": "KG004"
+  },
+  {
+    "id": 10,
+    "name": "tanasha",
+    "email": "rukundo@gmail.com",
+    "address": "KG002"
+  }
+]

@@ -1,0 +1,84 @@
+
+import { readToFIle } from "../service";
+import { writeToFile } from "../service";
+
+export async function getAll(__, res) {
+  try {
+    const data = await readToFIle();
+    if (!data)
+      return res.status(500).json({ message: "error in reading file" });
+    return res.status(200).json(data);
+  } catch (erro) {
+    res.status(500).json({ message: erro.message });
+  }
+}
+
+export async function getById(req, res) {
+  try {
+     const { id } = req.params;
+    const data = await readToFIle();
+    const exsistData = data.filter((data) => data.id === Number(id));
+    if(exsistData.length === 0) return res.status(404).json({message: "not data of thi id  found!"})
+    return res.status(200).json(exsistData)
+
+  } catch (erro) {
+    res.status(500).json({ message: erro.message });
+  }
+}
+
+export async function createData(req, res) {
+  try {
+    const existData = await readToFIle();
+    const { id, name, email, address } = req.body;
+    if (existData.find((data) => data.id === Number(id)))
+      return res
+        .status(400)
+        .json({ message: "id of this user  already exsist" });
+    if (!id) return res.status(400).json({ message: "id is required" });
+    if (!name) return res.status(400).json({ message: "name is required" });
+    if (!email) return res.status(400).json({ message: "email is required" });
+    if (!address)
+      return res.status(400).json({ message: "address is required" });
+    const newData = { id:Number(id), name, email, address };
+    existData.push(newData);
+    await writeToFile(existData);
+    return res.status(201).json({ message: "User created", data: existData });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+export async function updateData(req, res) {
+  try {
+    const { id } = req.params;
+    const newData = req.body;
+    if (!id) return res.status(500).json({ message: "no id provided" });
+    const data = await readToFIle();
+    const existUser = data.find(data => data.id === Number(id))
+    if(!existUser) return res.status(404).json({    message:"User not found" });
+    if(newData.id) return res.status(400).json({message: "You are not allowed to update the id"})
+    Object.assign(existUser,newData);
+    await writeToFile(data)
+    return res.status(200).json({message: "data updated", data: existUser}) 
+  } catch (err) {
+     res.status(500).json({ message: err.message });
+  }
+}
+
+export  async function DeleteData(req , res){
+     try {
+    const { id } = req.params;
+    const data = await readToFIle();
+    const indexOfDelete = data.findIndex(data => data.id === Number(id));
+    if(indexOfDelete) return res.status(404).json({message: "not data of thi id  found!"})
+    const deletedUser = data[indexOfDelete]
+    data.splice(indexOfDelete,1)
+    await writeToFile(data)
+    return res.status(200).json({message: "data deleted", deletedUser})
+    
+  } catch (erro) {
+    res.status(500).json({ message: erro.message });
+  }
+
+
+}
