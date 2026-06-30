@@ -6,5 +6,6 @@ router.get('/:id', getById)
 router.post('/', createData)
 router.patch('/:id', updateData)
 router.delete('/:id', DeleteData)
+
 export default router;
   
