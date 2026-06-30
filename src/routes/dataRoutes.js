@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { createData, DeleteData, getAll, getById, updateData } from "../controller/dataController.js";
-
 const router = Router();
 router.get('/', getAll)
 router.get('/:id', getById)

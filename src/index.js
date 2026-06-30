@@ -5,7 +5,6 @@ import dataRoutes  from './routes/dataRoutes.js'
 
 const app = express()
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 app.use('/data', dataRoutes)
 app.get('/', ( __, res)=>{
     res.status(200)
