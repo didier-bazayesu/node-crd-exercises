@@ -45,14 +45,14 @@ export async function getAllService() {
 export async function getByIdService(id) {
   const data = await readToFIle();
   const exsistData = data.filter((data) => data.id === Number(id));
-  if(exsistData.length === 0) throw new Error("not data")
+  if(exsistData.length === 0) throw new Error("no data")
   return exsistData;
 }
 
 export async function updateDataService(id, newData) {
   const data = await readToFIle();
   const indexOfUpdate = data.findIndex((data)=> data.id === Number(id))
-  if(indexOfUpdate === -1) throw new Error("not data")
+  if(indexOfUpdate === -1) throw new Error("no data")
   if(newData.id) throw new Error("you are not allowed to update the id")
   Object.assign(data[indexOfUpdate], newData);
   await writeToFile(data);
