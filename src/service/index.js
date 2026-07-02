@@ -29,11 +29,11 @@ export async function createDataService (data){
     throw new Error("ID already exists");
   }
    
-    const newUser = { ...data, id: Number(data.id) };
-  existData.push(newUser);
+    const newData = { ...data, id: Number(data.id) };
+  existData.push(newData);
   await writeToFile(existData);
 
-  return newUser;
+  return newData;
 
 }
 
