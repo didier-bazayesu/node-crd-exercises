@@ -22,7 +22,7 @@ export async function getById(req, res) {
     const data = await getByIdService(id);
     return res.status(200).json({ message: "data found", data });
   } catch (erro) {
-    if (erro.message === "not data") {
+    if (erro.message === "no data") {
       return res.status(404).json({ message: erro.message });
     }
     res.status(500).json({ message: erro.message });
@@ -60,7 +60,7 @@ export async function updateData(req, res) {
     const data = await updateDataService(id, req.body);
     return res.status(200).json({ message: "data updated", data });
   } catch (err) {
-    if (err.message === "not data") {
+    if (err.message === "no data") {
       return res.status(404).json({ message: err.message });
     }
     if (err.message === "you are not allowed to update the id") {
